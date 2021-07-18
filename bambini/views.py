@@ -7,9 +7,9 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 
-class BambinoDetail(UpdateView):
+class BambinoUpdate(UpdateView):
     model = Bambino
-    template_name = 'bambino_detail.html'
+    template_name = 'bambino_update.html'
     fields = ('nome', 'cognome', 'codice_fiscale')
     success_url = reverse_lazy("bambini_list")
 

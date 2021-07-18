@@ -1,10 +1,12 @@
 {% extends "layout/base_generic.html" %}
-{% block title %}Aggiungi un bambino{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block title %}Modifica bambino{% endblock %}
 {% block content %}
 <form method="POST">
     {% csrf_token %}
 
-    {{ form.as_p }}
+    {{ form | crispy }}
     <input type="submit" value="Invia">
 </form>
 {% endblock %}
