@@ -1,6 +1,33 @@
 {% extends "layout/base_generic.html" %}
 {% block title %}Dettaglio centro{% endblock %}
 {% block content %}
-{{object.pk}} - {{object.nome}} - {{object.cognome}}
+<h1>{{centro.nome}} </h1>
+<div class="row mb-3 mt-3">
+    <div class="col-12">
+        {{centro.indirizzo}}
+    </div>
+    <div class="col-12">
+        Questo centro estivo può ospitare al massimo {{centro.capienza}} bambini.
+    </div>
 
+    <div class="col-12 mb-3 mt-3">
+        <h2>Periodi:</h2>
+        <ul class="list-group">
+            {% for periodo in centro.get_periodi %}
+            <li class="list-group-item"> 
+                {{ periodo  }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-12 mb-3 mt-3">
+        <h2>Tariffe:</h2>
+        <ul class="list-group">
+            {% for tariffa in centro.get_tariffe %}
+            <li class="list-group-item">
+                {{ tariffa }} 
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

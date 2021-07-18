@@ -2,9 +2,19 @@
 {% block title %}Lista centri{% endblock %}
 {% block content %}
 {% for centro in object_list %}
-<li>
-    {{centro.nome}} - {{centro.cognome}}
-</li>
+<div class="card mb-4">
+    <h4 class="card-header d-flex align-items-center">
+        <div class="mr-auto">
+            <a class=" stretched-link" href="{% url 'centri_detail' centro.id %}">{{centro.nome}} </a>
+        </div>
+
+    </h4>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> {{centro.indirizzo}}</li>
+        </ul>
+    </div>
+</div> 
 {% endfor %}
 
 {% endblock %}

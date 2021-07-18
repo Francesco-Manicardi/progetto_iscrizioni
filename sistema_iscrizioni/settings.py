@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     'bambini.apps.BambiniConfig',
     'centri.apps.CentriConfig',
     'users.apps.UsersConfig',
+    'tariffe.apps.TariffeConfig',
+    'periodi.apps.PeriodiConfig',
+    'iscrizioni.apps.IscrizioniConfig',
+    'configurazioni.apps.ConfigurazioniConfig',
+    'orari.apps.OrariConfig',
     'crispy_forms',
-    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
