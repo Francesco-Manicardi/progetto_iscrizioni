@@ -1,25 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout/base_generic.html" %}
+{% block title %}Lista bambini{% endblock %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bambini</title>
-</head>
+<h3>I tuoi Bambini</h3>
+<div class="mb-3 mt-3">
 
-<body>
+    {% for bambino in object_list %}
 
-    <ul>
+    <div class="card mb-4">
+        <h4 class="card-header d-flex align-items-center">
+            <div class="mr-auto">
+                {{bambino.nome}} {{bambino.cognome}}
+            </div>
+            <div class="mr-3">
+                <a href="{{ bambino.id }}">
+                    <i class="fas fa-edit fa-lg"></i>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'bambini_delete' pk=bambino.id %}" class="hover-link">
+                    <i class="fas fa-times fa-lg"></i>
+                </a>
+            </div>
+        </h4>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Codice Fiscale: {{bambino.codice_fiscale}}</li>
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for bambino in object_list %}
-        <li>
-            {{bambino.nome}} - {{bambino.cognome}}
-        </li>
-        {% endfor %}
-
-
-    </ul>
-</body>
-
-</html>
+</div>
+<a href="{% url 'bambini_create' %}" class="btn btn-primary"> Aggiungi un Bambino</a>
+</div>
+{% endblock %}

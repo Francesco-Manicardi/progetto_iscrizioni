@@ -1,0 +1,15 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Elimina bambino{% endblock %}
+{% block content %}
+
+<h3>Eliminazione bambino</h3>
+<div class="mb-3 mt-3">
+    <form method="post">{% csrf_token %}
+        <p>Sei sicuro di voler eliminare dal sistema "{{ object.nome }} {{object.cognome}}"?</p>
+        <p>
+            Le iscrizioni di questo bambino verranno perse irrimediabilmente.
+        </p>
+        <input type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}

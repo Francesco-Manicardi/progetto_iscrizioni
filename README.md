@@ -1,4 +1,4 @@
-# progetto_iscrizioni
+# progetto_sistema_iscrizioni
 
 Progetto di Tecnologie Web Unimore
 

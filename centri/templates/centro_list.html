@@ -1,0 +1,10 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Lista centri{% endblock %}
+{% block content %}
+{% for centro in object_list %}
+<li>
+    {{centro.nome}} - {{centro.cognome}}
+</li>
+{% endfor %}
+
+{% endblock %}

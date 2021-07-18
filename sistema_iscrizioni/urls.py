@@ -1,4 +1,4 @@
-"""iscrizioni URL Configuration
+"""sistema_iscrizioni URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bambini/', include('bambini.urls')),
+    path('auth/', include('users.urls')),
+    path('centri/', include('centri.urls')), 
+    path('', lambda _: redirect('centri/'), name="home"), 
 ]
