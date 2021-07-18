@@ -8,11 +8,11 @@
     {% for iscrizione in object_list %}
 
     <div class="card mb-4">
-        <h4 class="card-header d-flex align-items-center">
-            <div class="mr-auto">
+        <h4 class="card-header d-flex  ">
+            <div>
                 {{iscrizione.nome}} {{iscrizione.cognome}}
             </div>
-            <div class="mr-3">
+            <div class="me-3 ms-auto">
                 <a href="{{ iscrizione.id }}">
                     <i class="fas fa-edit fa-lg"></i>
                 </a>

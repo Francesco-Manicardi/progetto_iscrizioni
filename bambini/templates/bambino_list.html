@@ -8,11 +8,11 @@
     {% for bambino in object_list %}
 
     <div class="card mb-4">
-        <h4 class="card-header d-flex align-items-center">
-            <div class="mr-auto">
+        <h4 class="card-header d-flex ">
+            <div class="me-auto">
                 {{bambino.nome}} {{bambino.cognome}}
             </div>
-            <div class="mr-3">
+            <div>
                 <a href="{{ bambino.id }}">
                     <i class="fas fa-edit fa-lg"></i>
                 </a>

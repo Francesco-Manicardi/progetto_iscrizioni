@@ -1,0 +1,104 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'centri_list' %}">
+            LOGO
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+                {% if user.is_authenticated %}
+                {% for group in request.user.groups.all %}
+                {% if group.name == "admin" %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminPanel">Pannello&nbsp;Admin</a>
+                </li>
+                {% endif %}
+                {% if group.name == "afc" %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url afc.summary %}">Sommario AFC</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url afc.payment_   summary %}">Sommario Pagamenti</a>
+                </li>
+                {% endif %}
+
+                {% if group.name == "referente" %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/schemone">Schemone</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/summary">Anagrafica</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url registro.index %}">Registro</a>
+                </li>
+                {% endif %}
+                {% if group.name == "coordinatore" %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/schemone">Schemoni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/summary">Anagrafica</a>
+                </li>
+                {% endif %}
+
+                {% if group.name == "direttore" or group.name == "afc" %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url dir.summary %}">Sommario Direttore</a>
+                </li>
+                {% endif %}
+
+                {% endfor %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{%  url 'iscrizioni_list'  %}">Iscrizioni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%  url 'centri_list'  %}">Centri Estivi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bambini_list' %}">Bambini</a>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}"> Login </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'centri_list' %}">Centri&nbsp;Estivi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Registrati</a>
+                </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.first_name }} {{ user.last_name }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'user_edit' %}">
+                                Account
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
