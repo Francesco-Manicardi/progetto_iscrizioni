@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'configurazioni.apps.ConfigurazioniConfig',
     'orari.apps.OrariConfig',
     'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [

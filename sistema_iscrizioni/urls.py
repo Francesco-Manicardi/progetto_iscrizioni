@@ -22,5 +22,6 @@ urlpatterns = [
     path('bambini/', include('bambini.urls')),
     path('auth/', include('users.urls')),
     path('centri/', include('centri.urls')), 
+    path('iscrizioni/', include('iscrizioni.urls')), 
     path('', lambda _: redirect('centri/'), name="home"), 
 ]
