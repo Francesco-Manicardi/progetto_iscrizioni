@@ -26,12 +26,20 @@
 </head>
 
 <body>
-    <div id="app">
-        {% include 'layout/navbar.html' %}
-        <main class="p-4">
-            {% block content %} Pagina vuota {% endblock %}
-        </main>
-    </div>
+    {% include 'layout/navbar.html' %}
+
+    <main class="p-4">
+
+        {% if messages %}
+        <div class="messages my-2">
+            {% for message in messages %}
+            <div class="alert alert-primary">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %} Pagina vuota {% endblock %}
+    </main>
 </body>
 
 </html>

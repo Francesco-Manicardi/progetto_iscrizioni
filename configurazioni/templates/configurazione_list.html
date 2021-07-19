@@ -1,0 +1,46 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Lista configurazioni{% endblock %}
+{% block content %}
+
+<h3>Configurazioni dei tuoi bambini</h3>
+<div class="mb-3 mt-3">
+
+    {% for configurazione in object_list %}
+
+    <div class="card mb-4">
+        <h4 class="card-header d-flex  ">
+            <div>
+                Configurazione di {{configurazione.bambino}} al centro "{{configurazione.centro}}" ({{configurazione.nome}})
+            </div>
+            <div class="me-3 ms-auto">
+                <a href="{{ configurazione.id }}">
+                    <i class="fas fa-edit fa-lg"></i>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'configurazioni_delete' pk=configurazione.id %}" class="hover-link">
+                    <i class="fas fa-times fa-lg"></i>
+                </a>
+            </div>
+        </h4>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Costo totale: {{configurazione.get_prezzo_totale}}</li>
+            </ul>
+            <div class="d-flex my-2">
+                <a href="{% url 'configurazioni_create' configurazione_id=configurazione.id  %}" class="btn btn-success">
+                    Aggiungi configurazioni
+                </a>
+                {% if configurazione.get_prezzo_totale > 0 %}
+                <a href="" class="btn btn-primary ms-auto">
+                    Vai al pagamento
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+<a href="{% url 'configurazioni_create_without_centro' %}" class="btn btn-primary"> Aggiungi un Configurazione</a>
+{% endblock %}

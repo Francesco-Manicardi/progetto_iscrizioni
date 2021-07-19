@@ -10,7 +10,7 @@
     <div class="card mb-4">
         <h4 class="card-header d-flex  ">
             <div>
-                {{iscrizione.nome}} {{iscrizione.cognome}}
+                Iscrizione di {{iscrizione.bambino}} al centro "{{iscrizione.centro}}" ({{iscrizione.nome}})
             </div>
             <div class="me-3 ms-auto">
                 <a href="{{ iscrizione.id }}">
@@ -25,13 +25,27 @@
         </h4>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Codice Fiscale: {{iscrizione.codice_fiscale}}</li>
+                {% for conf in iscrizione.get_configurazioni %}
+                <li class="list-group-item">
+                    {{conf}}
+                </li>
+                {% endfor %}
+                <li class="list-group-item">Costo totale: € {{iscrizione.get_prezzo_totale}}</li>
             </ul>
+            <div class="d-flex my-2">
+                <a href="{% url 'configurazioni_create' iscrizione_id=iscrizione.id  %}" class="btn btn-success">
+                    Aggiungi configurazioni
+                </a>
+                {% if iscrizione.get_prezzo_totale > 0 %}
+                <a href="" class="btn btn-primary ms-auto">
+                    Vai al pagamento
+                </a>
+                {% endif %}
+            </div>
         </div>
     </div>
     {% endfor %}
 
 </div>
-<a href="{% url 'iscrizioni_create' %}" class="btn btn-primary"> Aggiungi un Iscrizione</a>
-</div>
+<a href="{% url 'iscrizioni_create_without_centro' %}" class="btn btn-primary"> Aggiungi un Iscrizione</a>
 {% endblock %}

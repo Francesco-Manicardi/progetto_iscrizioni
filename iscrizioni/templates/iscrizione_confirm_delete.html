@@ -5,11 +5,11 @@
 <h3>Eliminazione iscrizione</h3>
 <div class="mb-3 mt-3">
     <form method="post">{% csrf_token %}
-        <p>Sei sicuro di voler eliminare dal sistema "{{ object.nome }} {{object.cognome}}"?</p>
+        <p>Sei sicuro di voler eliminare dal sistema la iscrizione "{{ object }}"?</p>
         <p>
-            Le iscrizioni di questo iscrizione verranno perse irrimediabilmente.
+            Eventuali pagamenti non saranno rimborsati.
         </p>
-        <input type="submit" value="Confirm">
+        <input type="submit" value="Conferma" class="btn btn-danger">
     </form>
 </div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Elimina configurazione{% endblock %}
+{% block content %}
+
+<h3>Eliminazione configurazione</h3>
+<div class="mb-3 mt-3">
+    <form method="post">{% csrf_token %}
+        <p>Sei sicuro di voler eliminare dal sistema la configurazione "{{ object }}"?</p>
+        {% if object.iscrizione.payed_at %}
+        <p>
+            La iscrizione era stata già pagata, ma non verrà rimborsata questa configurazione.
+        </p>
+        {% endif %}
+        <input type="submit" value="Conferma" class="btn btn-danger">
+    </form>
+</div>
+{% endblock %}

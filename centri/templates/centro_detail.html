@@ -14,8 +14,8 @@
         <h2>Periodi:</h2>
         <ul class="list-group">
             {% for periodo in centro.get_periodi %}
-            <li class="list-group-item"> 
-                {{ periodo  }}
+            <li class="list-group-item">
+                {{ periodo }}
             </li>
             {% endfor %}
         </ul>
@@ -25,9 +25,13 @@
         <ul class="list-group">
             {% for tariffa in centro.get_tariffe %}
             <li class="list-group-item">
-                {{ tariffa }} 
+                {{ tariffa }}
             </li>
             {% endfor %}
         </ul>
     </div>
+</div>
+
+<a href="{% url 'iscrizioni_create' centro_id=centro.pk %}" class="btn btn-primary"> Iscrivi un bambino a questo centro </a>
+
 {% endblock %}

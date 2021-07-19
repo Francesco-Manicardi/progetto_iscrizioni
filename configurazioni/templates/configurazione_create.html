@@ -1,10 +1,10 @@
 {% extends "layout/base_generic.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Aggiungi un'iscrizione{% endblock %}
+{% block title %}Aggiungi una configurazione{% endblock %}
 {% block content %}
 <h4 class="mb-2">
-    Per creare un iscrizione, scegli un bambino e fornisci un nome descrittivo.
+    Scegli il periodo da configurare e la tariffa che desideri.
 </h4>
 <form method="POST">
     {% csrf_token %}
