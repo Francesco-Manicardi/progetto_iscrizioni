@@ -24,9 +24,14 @@
             </div>
         </h4>
         <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Codice Fiscale: {{bambino.codice_fiscale}}</li>
-            </ul>
+            <div class="d-flex" style="max-height:30vh">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Codice Fiscale: {{bambino.codice_fiscale}}</li>
+                </ul>
+                {% if bambino.immagine %}
+                <img src="{{bambino.immagine.url}}" class="ms-auto" style="max-width:100px;">
+                {% endif %}
+            </div>
         </div>
     </div>
     {% endfor %}

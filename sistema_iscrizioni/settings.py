@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,7 +77,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries':{
-                'extra_registro_filters': 'registro.templatefilters.extra_registro_filters'
+                'extra_registro_filters': 'registro.templatefilters.extra_registro_filters',
+                'extra_user_filters': 'users.customfilters.user_filters'
             }
         },
     },
@@ -148,6 +150,12 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-LOCALE_NAME ='it_IT'
+LOCALE_NAME = 'it_IT'
 
 LANGUAGE_CODE = 'it-it'
+
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

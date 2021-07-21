@@ -1,3 +1,4 @@
+{% load extra_user_filters %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'centri_list' %}">
@@ -10,19 +11,17 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 
-                {% if user.is_authenticated %}
-                {% for group in request.user.groups.all %}
-                {% if group.name == "afc" %}
+                {% if user.is_authenticated %} 
+                {% if request.user|has_group:"afc" or request.user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'payments_list' %}">Sommario Pagamenti</a>
                 </li>
                 {% endif %}
-                {% if group.name == "educatore" %}
+                {% if request.user|has_group:"educatore" or request.user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'registro_index' %}">Registro</a>
                 </li>
-                {% endif %}
-                {% endfor %}
+                {% endif %} 
 
                 <li class="nav-item">
                     <a class="nav-link" href="{%  url 'iscrizioni_list'  %}">Iscrizioni</a>

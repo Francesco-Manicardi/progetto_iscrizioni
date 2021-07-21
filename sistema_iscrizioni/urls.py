@@ -16,15 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.shortcuts import redirect
+from .settings import MEDIA_ROOT, MEDIA_URL
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bambini/', include('bambini.urls')),
     path('auth/', include('users.urls')),
-    path('centri/', include('centri.urls')), 
-    path('iscrizioni/', include('iscrizioni.urls')), 
-    path('configurazioni/', include('configurazioni.urls')), 
-    path('payments/', include('payments.urls')), 
-    path('registro/', include('registro.urls')), 
-    path('', lambda _: redirect('centri/'), name="home"), 
+    path('centri/', include('centri.urls')),
+    path('iscrizioni/', include('iscrizioni.urls')),
+    path('configurazioni/', include('configurazioni.urls')),
+    path('payments/', include('payments.urls')),
+    path('registro/', include('registro.urls')),
+    path('', lambda _: redirect('centri/'), name="home"),
+
+
 ]
+
+urlpatterns += static(MEDIA_URL,document_root=MEDIA_ROOT)

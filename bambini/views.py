@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 class BambinoUpdate(UpdateView):
     model = Bambino
     template_name = 'bambino_update.html'
-    fields = ('nome', 'cognome', 'codice_fiscale')
+    fields = ('nome', 'cognome', 'codice_fiscale', 'immagine')
     success_url = reverse_lazy("bambini_list")
 
 
@@ -24,7 +24,7 @@ class BambinoList(ListView):
 
 class BambinoCreate(CreateView):
     model = Bambino
-    fields = ('nome', 'cognome', 'codice_fiscale')
+    fields = ('nome', 'cognome', 'codice_fiscale', 'immagine')
     template_name = 'bambino_create.html'
     success_url = reverse_lazy("bambini_list")
 
