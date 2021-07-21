@@ -32,6 +32,11 @@
     </div>
 </div>
 
-<a href="{% url 'iscrizioni_create' centro_id=centro.pk %}" class="btn btn-primary"> Iscrivi un bambino a questo centro </a>
+{% if centro.get_capienza_residua > 0 %}
+<a href="{% url 'iscrizioni_create' centro_id=centro.pk %}" class="btn btn-primary"> Iscrivi un bambino a questo centro
+</a>
+{% else %}
+Le iscrizioni per questo centro estivo sono chiuse: la capienza massima è stata raggiunta.
+{% endif %}
 
 {% endblock %}

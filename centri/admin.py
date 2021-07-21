@@ -1,4 +1,11 @@
 from django.contrib import admin
-from .models import Centro 
+from centri.models import Centro
 
-admin.site.register(Centro)
+
+@admin.register(Centro)
+class CentroAdmin(admin.ModelAdmin):
+    list_display = ("nome", "indirizzo", "capienza", "capienza_residua")
+    list_filter = ("nome", "indirizzo")
+
+    def capienza_residua(self, obj):
+        return obj.get_capienza_residua()
