@@ -1,3 +1,4 @@
+from django.urls.base import reverse
 from bambini.models import Bambino
 from iscrizioni.models import Iscrizione
 from django.test import TestCase
@@ -5,6 +6,7 @@ from django.test import TestCase
 from django.test import TestCase
 from .models import Centro
 from django.contrib.auth.models import User
+from django.test import Client
 
 
 class CentroMethodTests(TestCase):
@@ -56,3 +58,18 @@ class CentroMethodTests(TestCase):
 
         new_capacity = self.centro1.get_capienza_residua()
         self.assertEqual(old_capacity, new_capacity)
+
+    def test_iscrizione_presente_solo_se_capienza_residua(self):
+        c = Client()
+
+        while(self.centro1.get_capienza_residua() > 0):
+            response = c.get(reverse('centri_detail', kwargs={"pk": 1}))
+            self.assertContains(response, "Iscrivi un bambino a questo centro")
+            iscrizione = Iscrizione(nome="Iscrizione test",
+                                    centro=self.centro1, bambino=self.bambino)
+            iscrizione.save()
+
+        response = c.get(reverse('centri_detail', kwargs={"pk": 1}))
+        self.assertNotContains(response, "Iscrivi un bambino a questo centro")
+        self.assertContains(
+            response, "Le iscrizioni per questo centro estivo sono chiuse: la capienza massima è stata raggiunta.")
