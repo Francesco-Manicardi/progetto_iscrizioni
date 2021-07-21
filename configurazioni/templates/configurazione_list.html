@@ -10,7 +10,8 @@
     <div class="card mb-4">
         <h4 class="card-header d-flex  ">
             <div>
-                Configurazione di {{configurazione.bambino}} al centro "{{configurazione.centro}}" ({{configurazione.nome}})
+                Configurazione di {{configurazione.bambino}} al centro "{{configurazione.centro}}"
+                ({{configurazione.nome}})
             </div>
             <div class="me-3 ms-auto">
                 <a href="{{ configurazione.id }}">
@@ -25,10 +26,11 @@
         </h4>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Costo totale: {{configurazione.get_prezzo_totale}}</li>
+                <li class="list-group-item">Costo totale: € {{configurazione.get_prezzo_totale}}</li>
             </ul>
             <div class="d-flex my-2">
-                <a href="{% url 'configurazioni_create' configurazione_id=configurazione.id  %}" class="btn btn-success">
+                <a href="{% url 'configurazioni_create' configurazione_id=configurazione.id  %}"
+                    class="btn btn-success">
                     Aggiungi configurazioni
                 </a>
                 {% if configurazione.get_prezzo_totale > 0 %}

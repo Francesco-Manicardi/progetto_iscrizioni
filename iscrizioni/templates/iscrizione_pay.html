@@ -1,0 +1,66 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Pagamento iscrizioni{% endblock %}
+{% block content %}
+
+<h3>Pagamento iscrizione</h3>
+<div class="mb-3 mt-3">
+    <div class="card mb-4">
+        <h4 class="card-header d-flex  ">
+            <div>
+                Iscrizione di {{iscrizione.bambino}} al centro "{{iscrizione.centro}}" ({{iscrizione.nome}})
+            </div>
+        </h4>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for conf in iscrizione.get_configurazioni %}
+                <li class="list-group-item d-flex">
+                    <div class="">{{conf}}</div>
+                </li>
+                {% endfor %}
+                <li class="list-group-item">Costo totale: € {{iscrizione.get_prezzo_totale}}</li>
+            </ul>
+
+
+
+        </div>
+    </div>
+
+    <div class="col-12 text-center m-3">
+        <script
+            src="https://www.paypal.com/sdk/js?client-id=AQHln3b-0Ysv2_fHJiHR0jltcUnEFDoWIx0pf2aVEGDtjtRgk7-Pt3b5t5qB8rooYB8osWlBjrFVM3In&currency=EUR&components=buttons&disable-funding=credit,card,bancontact,blik,eps,giropay,ideal,mercadopago,mybank,p24,sepa,sofort,venmo">
+            </script>
+
+        <div id="paypal-button-container"></div>
+
+        <!-- Add the checkout buttons, set up the order and approve the order -->
+        <script>
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: 'Pagamento Iscrizione {{iscrizione}}',
+                            amount: {
+                                value: '{{iscrizione.get_prezzo_totale}}'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function () {
+                        console.log(details);
+
+                        window.location = `{% url 'payments_paypal_completed' pk=iscrizione.id %}`;
+                    });
+                }
+            }).render('#paypal-button-container'); // Display payment options on your web page
+        </script>
+    </div>
+    <div class="my-5"> 
+        {% if user.is_superuser %}
+        <a href="{% url 'payments_paypal_completed' pk=iscrizione.id %}" class="btn btn-primary">
+            Simulazione pagamento (solo admin)
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

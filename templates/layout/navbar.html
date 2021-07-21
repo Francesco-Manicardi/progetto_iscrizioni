@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'centri_list' %}">
@@ -13,48 +12,16 @@
 
                 {% if user.is_authenticated %}
                 {% for group in request.user.groups.all %}
-                {% if group.name == "admin" %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/adminPanel">Pannello&nbsp;Admin</a>
-                </li>
-                {% endif %}
                 {% if group.name == "afc" %}
-
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url afc.summary %}">Sommario AFC</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url afc.payment_   summary %}">Sommario Pagamenti</a>
+                    <a class="nav-link" href="{% url 'payments_list' %}">Sommario Pagamenti</a>
                 </li>
                 {% endif %}
-
-                {% if group.name == "referente" %}
+                {% if group.name == "educatore" %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/schemone">Schemone</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/summary">Anagrafica</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url registro.index %}">Registro</a>
+                    <a class="nav-link" href="{% url 'registro_index' %}">Registro</a>
                 </li>
                 {% endif %}
-                {% if group.name == "coordinatore" %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/schemone">Schemoni</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/summary">Anagrafica</a>
-                </li>
-                {% endif %}
-
-                {% if group.name == "direttore" or group.name == "afc" %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url dir.summary %}">Sommario Direttore</a>
-                </li>
-                {% endif %}
-
                 {% endfor %}
 
                 <li class="nav-item">

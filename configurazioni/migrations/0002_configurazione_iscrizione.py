@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('iscrizioni', '0005_alter_iscrizione_payed_at'),
+        ('iscrizioni', '0001_initial'),
         ('configurazioni', '0001_initial'),
     ]
 

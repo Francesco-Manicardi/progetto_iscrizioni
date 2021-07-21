@@ -1,5 +1,6 @@
 from django.forms.models import ModelForm
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Iscrizione
@@ -15,6 +16,11 @@ class IscrizioneUpdate(UpdateView):
     template_name = 'iscrizione_update.html'
     fields = ['nome']
     success_url = reverse_lazy("iscrizioni_list")
+
+
+class IscrizionePay(DetailView):
+    model = Iscrizione
+    template_name = 'iscrizione_pay.html'
 
 
 class IscrizioneList(ListView):

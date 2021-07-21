@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'iscrizioni.apps.IscrizioniConfig',
     'configurazioni.apps.ConfigurazioniConfig',
     'orari.apps.OrariConfig',
+    'payments.apps.PaymentsConfig',
+    'registro.apps.RegistroConfig',
     'crispy_forms',
     'crispy_bootstrap5'
 ]
@@ -73,6 +75,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'extra_registro_filters': 'registro.templatefilters.extra_registro_filters'
+            }
         },
     },
 ]
@@ -142,3 +147,7 @@ LOGIN_REDIRECT_URL = 'centri_list'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOCALE_NAME ='it_IT'
+
+LANGUAGE_CODE = 'it-it'

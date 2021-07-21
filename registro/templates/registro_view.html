@@ -1,0 +1,114 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Registro {{data_registro}}{% endblock %}
+{% block content %}
+{% load extra_registro_filters %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<h4>
+    {{data_registro}}
+</h4>
+<h5>Periodo: {{periodo}}</h5>
+<a href="{% url 'registro_index' %}">Torna alla selezione</a></h6>
+<div class="mb-3 mt-3">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" style="
+        overflow: hidden;
+        white-space: nowrap;">
+            <thead class="text-center">
+                <tr>
+                    <th>
+                        Bambino
+                    </th>
+                    {% for orario in orari %}
+                    <th>
+                        {{orario.nome}}
+                    </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for bambino in bambini %}
+                <tr data-bambino="{{bambino.id}}">
+                    <td>
+                        {{bambino}}
+                    </td>
+
+                    {%for orario in orari %}
+                    {% is_enrolled as should_display %}
+                    {% if should_display %}
+                    <td>
+                        {% is_assente as assenza%}
+                        <span class="btn btn-evento
+                        {% if  assenza %}
+                          btn-danger
+                        {% else %}
+                         btn-success
+                        {% endif %}" data-evento="{{assenza}}" data-orario="{{orario.id}}">
+                            {{ assenza|yesno:'Assente,Presente'}}</span>
+                    </td>
+                    {% else %}
+                    <td>
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="text-center">
+                <tr>
+                    <td>
+                        Tot. presenti:
+                    </td>
+                    {% for orario in orari %}
+                    <td data-somma-evento="{{orario.id}}">
+                    </td>
+                    {% endfor %}
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        function updateCounts() {
+            var idDaRiepilogare = [1, 2, 3]
+            idDaRiepilogare.forEach(function (id) {
+                $("[data-somma-evento=" + id + "]").text( 
+                    $("[data-orario=" + id + "][data-evento=0]").length
+                );
+
+            });
+        }
+        updateCounts();
+
+        $("table").on("click", ".btn-evento", function () {
+
+            if ($(this).hasClass('disabled')) {
+                return false;
+            }
+            var context = $(this);
+
+            $(this).addClass("disabled");
+
+            let orario = $(this).attr("data-orario"),
+                evento = $(this).attr("data-evento"),
+                data = "{{data_registro}}",
+                bambino = $(this).parents("tr").attr("data-bambino");
+
+            $.ajax({
+                url: `/registro/toggle/${orario}/${evento}/{{periodo.id}}/{{offset_giorno}}/${bambino}`,
+                type: "get",
+                success: function (result) {
+                    window.location.reload();
+                }
+            });
+        });
+
+    });
+
+</script>
+</div>
+
+{% endblock %}

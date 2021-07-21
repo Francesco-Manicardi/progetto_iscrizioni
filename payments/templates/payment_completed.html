@@ -1,0 +1,29 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Pagamento iscrizione confermato{% endblock %}
+{% block content %}
+
+<h3>Pagamento iscrizione confermato</h3>
+<div class="mb-3 mt-3">
+    <div class="card mb-4">
+        <h4 class="card-header d-flex  ">
+            <div>
+                Il pagamento di {{iscrizione}} è stato confermato
+            </div>
+        </h4>
+        <div class="card-body">
+
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item  ">
+                    Totale pagato: € {{iscrizione.get_prezzo_totale}}
+                </li>
+                <li class="list-group-item">
+                    Pagamento effettuato il {{iscrizione.payed_at}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="{% url 'iscrizioni_list' %}" class="btn btn-primary">Torna alla lista delle tue iscrizioni</a>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout/base_generic.html" %}
+{% block title %}Indice registro{% endblock %}
+{% block content %}
+
+<h3>Scegli il registro da compilare</h3>
+<div class="mb-3 mt-3">
+    {% for centro in object_list %}
+    <div class="">
+        <h5>
+            {{centro}}
+        </h5>
+
+        <table class="table table-striped table-hover" style="white-space: nowrap;">
+            <tbody>
+                {% for periodo in centro.get_periodi %}
+                <tr>
+                    <td>
+                        {{periodo}}
+                    </td>
+
+                    {% for day in periodo.get_days %}
+                    <td>
+                        <a href="{% url 'registro_view' pk=periodo.id centro_id=centro.id giorno=day %}">
+                            {{day|add:1}}
+                        </a>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

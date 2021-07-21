@@ -26,20 +26,31 @@
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 {% for conf in iscrizione.get_configurazioni %}
-                <li class="list-group-item">
-                    {{conf}}
+                <li class="list-group-item d-flex">
+                    <div class="">{{conf}}</div>
+                    <div class="ms-auto">
+                        <a href="{% url 'configurazioni_delete' pk=conf.id %}" class="hover-link">
+                            <i class="fas fa-times fa-lg"></i>
+                        </a>
+                    </div>
                 </li>
                 {% endfor %}
                 <li class="list-group-item">Costo totale: € {{iscrizione.get_prezzo_totale}}</li>
             </ul>
             <div class="d-flex my-2">
+                {% if not iscrizione.payed_at %} 
                 <a href="{% url 'configurazioni_create' iscrizione_id=iscrizione.id  %}" class="btn btn-success">
                     Aggiungi configurazioni
                 </a>
                 {% if iscrizione.get_prezzo_totale > 0 %}
-                <a href="" class="btn btn-primary ms-auto">
+                <a href="{% url 'iscrizioni_pay' pk=iscrizione.id %}" class="btn btn-primary ms-auto">
                     Vai al pagamento
                 </a>
+                {% endif %}
+                {% else %}
+                <span class="ms-auto">
+                    Pagata il {{iscrizione.payed_at}}
+                </span>
                 {% endif %}
             </div>
         </div>
