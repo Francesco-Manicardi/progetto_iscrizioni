@@ -45,6 +45,11 @@ class CentroMethodTests(TestCase):
 
         self.assertEqual(new_capacity, old_capacity-1)
 
+        iscrizione.delete()
+        new_capacity = self.centro1.get_capienza_residua()
+        self.assertEqual(new_capacity, old_capacity)
+
+
     def test_capienza_indipendente_centri_estivi_diversi(self):
         """
         La capacità residua di un centro estivo deve rimanere inalterata se si aggiunge una nuova iscrizione
